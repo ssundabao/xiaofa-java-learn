@@ -6,8 +6,9 @@
 https://www.rabbitmq.com/install-rpm.html（rabbitmq下载安装官网）  
 1、安装erlang
 官网提供了三个方式，Erlang Solutions、EPEL、openSUSE，选择第一种好了。  
+![](https://raw.githubusercontent.com/zhaoxiaofa/xiaofa-java-learn/master/pictures/rabbitmq/rabbitmq-erlang.jpg)
+点击跳转到Erlang Solutions的官网下载页，https://www.erlang-solutions.com/resources/download.html。这里有个坑，不要选择download的方式，下了俩小时，硬是下载不下来。鼠标往下拉，选择 Installation using repository 的方式。  
 
-跳转到Erlang Solutions的官网下载页，https://www.erlang-solutions.com/resources/download.html。这里有个坑，不要选择download的方式，下了俩小时，硬是下载不下来。鼠标往下拉，选择 Installation using repository 的方式。
 注意点：  
 1、yum update执行时间会很长，慢慢等，等待的时间可以复习下相关概念；  
 2、在安装elixir后要配置环境变量，注意替换掉文档中的path为实际安装路径；
