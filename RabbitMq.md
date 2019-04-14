@@ -16,7 +16,7 @@ wget https://packages.erlang-solutions.com/erlang-solutions-1.0-1.noarch.rpm
 rpm -Uvh erlang-solutions-1.0-1.noarch.rpm  
 Alternatively: adding the repository entry manually 下的可以不执行。  
 Adding repository with dependencies 下的可以不执行。  
-3、最后执行 yum install erlang 。执行时间很长（大约一个多小时），慢慢等待。  
+3、最后执行 yum install erlang 。执行时间很长（大约两个小时，不得不佩服国内的网速），慢慢等待。  
 4、执行完毕后查看erlang版本，命令：erl  
 5、选择对应的rabbitmq的版本，对应关系图官网已经给了，参考下面链接，**版本一定要兼容**。  
 https://www.rabbitmq.com/which-erlang.html  
