@@ -81,6 +81,9 @@ rabbitmqctl add_user  user_admin  passwd_admin
 设置为管理员  
 rabbitmqctl set_user_tags user_admin administrator  
 
+给账户配置具体权限，如果想要在程序中使用该账号，必须配置权限，否则项目启动就会报错。  
+rabbitmqctl set_permissions -p / user_admin ".*" ".*" ".*"
+
 重启rabbitmq  
 此时可以使用新建的账号进行登录。
 #参考资料#
