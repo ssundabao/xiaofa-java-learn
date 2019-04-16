@@ -82,9 +82,11 @@ rabbitmqctl add_user  user_admin  passwd_admin
 rabbitmqctl set_user_tags user_admin administrator  
 
 给账户配置具体权限，如果想要在程序中使用该账号，必须配置权限，否则项目启动就会报错。  
-rabbitmqctl set_permissions -p / user_admin ".*" ".*" ".*"
-
+rabbitmqctl set_permissions -p / user_admin ".*" ".*" ".*"  
+配置权限成功以后可以看到，新增的账号和guest账号权限一样。  
+![](https://raw.githubusercontent.com/zhaoxiaofa/xiaofa-java-learn/master/pictures/rabbitmq/user-right.png)
 重启rabbitmq  
 此时可以使用新建的账号进行登录。
 #参考资料#
-https://www.jianshu.com/p/dae5bbed39b1
+https://www.rabbitmq.com/tutorials/tutorial-one-java.html
+https://www.rabbitmq.com/download.html
