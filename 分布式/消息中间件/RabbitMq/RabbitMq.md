@@ -4,7 +4,7 @@
 # Linux环境下搭建单机RabbitMq #
 本人是在虚拟机上搭建的，安装rabbitmq需要安装erlang，还涉及版本之间的兼容问题，安装过程并不简单，在搭建环境的过程中，也踩过不少坑，安装方法按照官网来，网上有很多安装教程，但是质量良莠不齐，还是官网最可靠。  
 https://www.rabbitmq.com/install-rpm.html（rabbitmq下载安装官网）  
-### 1、安装erlang  ### 
+### 1、安装erlang  
 官网提供了三个方式，Erlang Solutions、EPEL、openSUSE，选择第一种好了。  
 ![](https://raw.githubusercontent.com/zhaoxiaofa/xiaofa-java-learn/master/pictures/rabbitmq/rabbitmq-erlang.jpg)
 
