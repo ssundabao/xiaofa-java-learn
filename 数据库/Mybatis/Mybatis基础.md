@@ -1,5 +1,6 @@
 # 1. Mybatis原理 #
-本质是对jdbc的封装，并不是完整的ORM框架，国内用Mybatis的公司很多，其实在国外，使用率很低。 
+本质是对jdbc的封装，增加事务松耦合，并实现了ORM框架的实体类和sql动态对应功能，但并不是完整的ORM框架，国内用Mybatis的公司很多，其实在国外，使用率很低。 
+  ·    
 ## 1.1 jdbc对于数据库的操作
 
 
@@ -49,3 +50,12 @@
 ### 1.2.1 Resources.getResourceAsStream("mybatis-config.xml") ###
 
 
+### 1.2.2 new SqlSessionFactoryBuilder().build(inputStream) ###
+
+
+### 1.2.3 sqlSessionFactory.openSession() ###
+
+
+### 1.2.4 sqlSession.insert("insert", user) ###
+ 
+ 
