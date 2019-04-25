@@ -179,7 +179,7 @@ head -n1 取一个值
 执行结果是将目前正在运行的第一个项目文件名称赋值给appName变量。  
 
 <br/>
-解析start函数
+**解析start函数**
 
     function start()
 	{
@@ -196,4 +196,32 @@ ps -ef |grep java：搜索java进程
 ps -ef |grep java|grep $appName:在搜索结果中筛选想要操作的项目进程  
 wc命令的功能为统计指定文件中的字节数、字数、行数, 并将统计结果显示输出。  
 -l 统计行数  
-ps -ef |grep java|grep $appName|wc -l 完整命令意思是：查询想要操作进程是否存在 
+ps -ef |grep java|grep $appName|wc -l 完整命令意思是：查询想要操作进程是否存在   
+如果存在，给出提示，如果不存在，执行springboot项目的启动命令。  
+<br/>
+
+**解析stop函数**
+
+    function stop()
+	{
+		appId=`ps -ef |grep java|grep $appName|awk '{print $2}'`
+		if [ -z $appId ];then
+		    echo "Maybe $appName not running, please check it..."
+		else
+	        echo "The $appName is stopping..."
+	        kill $appId
+		fi
+	}
+
+执行 ps -ef |grep java|grep $appName： 
+
+    root  10636  1 90 13:52 pts/100:00:02 java -jar ./hello-SNAPSHOT.jar -XX:+UseG1GC -XX:+HeapDumpOnOutOfMemoryError -Xms512M -Xmx4G
+
+awk print方法：  
+awk工作流程是这样的：读入有'\n'换行符分割的一条记录，然后将记录按指定的域分隔符划分域，填充域，$0则表示所有域,$1表示第一个域,$n表示第n个域。默认域分隔符是"空白键" 或 "[tab]键"  
+
+执行 ps -ef |grep java|grep $appName|awk '{print $2}：  
+    
+	10636
+执行结果就是进程号。如果进程号不为空，则杀掉该进程。  
+
