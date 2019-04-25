@@ -15,7 +15,7 @@
 注意：每个shell脚本的开头都是 #!/bin/bash 固定写法。
 
 ## 1.2 springboot项目启动脚本 ##
-以下脚本为网上找的一个springboot项目启动脚本，从实际应用中学习会更快，更实用。下面解析该脚本：
+以下脚本为网上找的一个springboot项目启动脚本，从实际应用中学习会更快，更实用。
 
 
     #!/bin/bash
@@ -125,4 +125,75 @@
 		usage;;
 	esac
 	
+<br/> 
+现在开始解析该脚本：
+  
+    appName=$2
 
+解释下$符号的使用：  
+$0：当前脚本的文件名  
+$1：第一个参数  
+$2：第二个参数  
+appName=$2 的意思就是把执行命令时传入的第二个参数赋值给appName，我的执行命令是：  
+
+    ./app.sh start 
+
+没有指定第二个参数，如果有多个web项目在一台服务器上同时启动，就要在第二个参数指定项目名，例如有两个项目 hello.jar 和 world.jar ：
+
+    ./app.sh start hello.jar
+
+<br/> 
+顺带解释下：  
+    
+    case $1 in
+		start)
+		start;;
+	
+		stop)
+		stop;;
+		
+		restart)
+		restart;;
+		
+		status)
+		status;;
+		
+		*)
+		usage;;
+	esac
+
+case ... esac 与Java中的 switch ... case 语句类似。$1取的是执行命令中的第一个参数，如上述例子中的 start。  
+;; 类似Java中的break  
+*) 类似Java中的default 没有找到匹配值   
+<br/> 
+
+    -z $appName
+$appName是取值  
+[ -z STRING ] “STRING” 的长度为零则为真。  
+<br/>
+
+    appName=`ls -t |grep .jar$ |head -n1`
+ls -t :按时间排序列出  
+|grep .jar$ 列出结果中匹配后缀为.jar的文件   $指定后缀  
+head -n1 取一个值  
+执行结果是将目前正在运行的第一个项目文件名称赋值给appName变量。  
+
+<br/>
+解析start函数
+
+    function start()
+	{
+		count=`ps -ef |grep java|grep $appName|wc -l`
+		if [ $count != 0 ];then
+			echo "Maybe $appName is running, please check it..."
+		else
+			echo "The $appName is starting..."
+			nohup java -jar ./$appName -XX:+UseG1GC -XX:+HeapDumpOnOutOfMemoryError -Xms512M -Xmx4G > /dev/null 2>&1 &
+		fi
+	}
+
+ps -ef |grep java：搜索java进程  
+ps -ef |grep java|grep $appName:在搜索结果中筛选想要操作的项目进程  
+wc命令的功能为统计指定文件中的字节数、字数、行数, 并将统计结果显示输出。  
+-l 统计行数  
+ps -ef |grep java|grep $appName|wc -l 完整命令意思是：查询想要操作进程是否存在 
