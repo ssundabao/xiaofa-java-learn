@@ -14,5 +14,20 @@ redis包保存路径为 /usr/local/develop
 
     make
 
+	cd src
+
+	make install
+
     
+## 2. 配置 ##
+
+    cd /usr/local/develop
+
+	mkdir redis-cluster
+
+	cd redis-cluster
+
+	mkdir 7000 7001
+
+	
 
