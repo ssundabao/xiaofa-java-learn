@@ -29,5 +29,14 @@ redis包保存路径为 /usr/local/develop
 
 	mkdir 7000 7001
 
-	
+复制默认的redis.conf文件到 7000 7001目录下，并修改其配置。如下配置需要修改：  
+
+    port 7000 #端口号
+	bind 0.0.0.0  #绑定可访问IP地址 设为无限制
+    daemonize yes  #后台运行
+    cluster-enabled yes #允许集群模式
+    cluster-config-file nodes.conf #配置文件
+    cluster-node-timeout 5000  #超时时间
+    appendonly yes  
+	protected-mode no #保护模式设置no,否则在5.0版本无法通过其他ip连接，之前版本好像不受影响
 
