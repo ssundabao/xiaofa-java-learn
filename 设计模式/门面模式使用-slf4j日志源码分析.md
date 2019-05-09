@@ -288,9 +288,7 @@ bind()方法里有这样一行 ： `StaticLoggerBinder.getSingleton();`
 **解释**：个人认为jvm选择了其中一个执行。
 
 
-
-
-## 4. Spring日志加载 ##
+## 4. TODO Spring日志加载 ##
 
 - 在debug的时候不要使用spring的web项目，最开始偷懒，在自己的公司项目中加了行日志，想打断点进入，可死活进入不到 bind 方法体内，原因是spring初始化的时候已经加载了很多框架中的日志，在加载第一个的时候已经初始化了。
 
