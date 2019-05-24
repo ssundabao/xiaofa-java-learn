@@ -5,3 +5,7 @@
 ![](https://raw.githubusercontent.com/zhaoxiaofa/xiaofa-java-learn/master/pictures/mybatis/%E8%A7%A3%E6%9E%90%E5%99%A8%E8%B7%AF%E5%BE%84%E6%88%AA%E5%9B%BE.png)
 
 
+**先仔细研读下所有类的源码实现。**
+
+## XPathParser
+
