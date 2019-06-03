@@ -7,6 +7,7 @@
 	  `name` varchar(255) DEFAULT NULL COMMENT '姓名',
 	  `create_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
 	  PRIMARY KEY (`id`),
+	  KEY `test_name_type_time` (`name`,`type`,`create_time`) USING BTREE,
 	  KEY `test_type` (`type`) USING BTREE
 	) ENGINE=InnoDB AUTO_INCREMENT=252 DEFAULT CHARSET=utf8;
 
@@ -93,7 +94,25 @@ show warnings的结果为：
 
 修改为join后：
 
-    
+    UPDATE test t
+	JOIN (
+		SELECT
+			o.id,
+			o. NAME
+		FROM
+			test o
+		WHERE
+			o. NAME = 'zhaoxiaofa'
+		AND o.type IN ('2', '3')
+		ORDER BY
+			o.create_time,
+			o.id
+		LIMIT 1
+	) s ON t.id = s.id
+	SET mobile = '13912345678'
 
+执行过程：
+![](https://raw.githubusercontent.com/zhaoxiaofa/xiaofa-java-learn/master/pictures/mysql/update_join.png)   
 
+## 混合排序 ##
 	
