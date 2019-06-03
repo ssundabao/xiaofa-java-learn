@@ -2,10 +2,10 @@
 打开官网 http://kafka.apache.org/quickstart  
 步骤基本就是：下载、解压、配置、启动、测试  
 
-## 下载解压跳过 ##
+## 下载解压跳过，直接看官网 ##
 
 ## 配置 ##
-采用自己搭建的zk集群作为kafka的注册中心。zk集群的配置、启动参见zookeeper。  
+采用自己搭建的zk集群作为kafka的注册中心。zk集群的配置、启动参见zookeeper目录下我的文档。  
 
 kafka配置，在默认的配置中修改三个配置。
 
@@ -18,7 +18,7 @@ kafka配置，在默认的配置中修改三个配置。
 
     ./kafka-server-start.sh -daemon ../config/server.properties 
 
-daemon表示后台启动。  
+daemon表示后台启动，三台服务器均执行。  
 
 ## 创建topic ##
 
