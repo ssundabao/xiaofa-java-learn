@@ -1,3 +1,17 @@
+下面测试所用到的数据表：
+
+    CREATE TABLE `test` (
+	  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+	  `mobile` varchar(16) DEFAULT NULL COMMENT '手机号',
+	  `type` varchar(255) DEFAULT NULL COMMENT '类型',
+	  `name` varchar(255) DEFAULT NULL COMMENT '姓名',
+	  `create_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+	  PRIMARY KEY (`id`),
+	  KEY `test_type` (`type`) USING BTREE
+	) ENGINE=InnoDB AUTO_INCREMENT=252 DEFAULT CHARSET=utf8;
+
+
+
 ## LIMIT 语句 ##
 看下面一条sql，一般情况下我们会在 type, name, create_time 字段上加组合索引。这样条件排序都能有效的利用到索引，性能迅速提升。
     
@@ -27,14 +41,56 @@
 
 前置条件：city_id为vachar,有索引。**MySQL的策略是将字符串转换为数字之后再比较。函数作用于表字段，索引失效。**
 
-    explain SELECT * FROM `city` WHERE city_id = 201;
+    explain SELECT * FROM `test` WHERE type = 1;
 	show warnings;
 	
 show warnings的结果为：  
 
-    Cannot use ref access on index 'city_id' due to type or collation conversion on field 'city_id'
-	Cannot use range access on index 'city_id' due to type or collation conversion on field 'city_id'
+	1	SIMPLE	test		ALL	type				251	10	Using where
+    Cannot use ref access on index 'type' due to type or collation conversion on field 'type'
+	Cannot use range access on index 'type' due to type or collation conversion on field 'type'
 
+如果把sql语句改为type='1',详细如下，则不会有问题。  
+
+    explain SELECT * FROM `test` WHERE type = '1';
+	show warnings;
+
+执行结果中没有warning信息。
+
+    1	SIMPLE	test		ref	test_type	test_type	768	const	1	100	
+
+
+
+## 关联更新、删除 ##
+比如下面UPDATE语句，MySQL实际执行的是循环/嵌套子查询（DEPENDENT SUBQUERY)。
+
+    UPDATE test t
+	SET mobile = '13812345678'
+	WHERE
+		t.id IN (
+			SELECT
+				id
+			FROM
+				(
+					SELECT
+						o.id,
+						o. NAME
+					FROM
+						test o
+					WHERE
+						o. NAME = 'zhaoxiaofa'
+					AND o.type IN ('2', '3')
+					ORDER BY
+						o.create_time,
+						o.id
+					LIMIT 1
+				) t
+		);
+
+
+修改为join后：
+
+    
 
 
 	
