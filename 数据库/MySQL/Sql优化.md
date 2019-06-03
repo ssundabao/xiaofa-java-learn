@@ -87,6 +87,9 @@ show warnings的结果为：
 				) t
 		);
 
+执行分析：  
+![](https://raw.githubusercontent.com/zhaoxiaofa/xiaofa-java-learn/master/pictures/mysql/update.png)
+
 
 修改为join后：
 
