@@ -48,8 +48,11 @@
 无法进行添加和删除，会直接抛异常。
 
 ## 源码分析 ##
-贴一张类关系图：  
+贴一张类关系图（图片来源于网络）：  
 
+**其实最核心的问题就是要搞清楚，java.util.Arrays.ArrayList和java.util.ArrayList的区别。**
+
+![](https://raw.githubusercontent.com/zhaoxiaofa/xiaofa-java-learn/master/pictures/base/arrays-int.jpg)
 
 
 ### 错误一原理解析： ###
@@ -73,5 +76,7 @@
     private final E[] a;
 
 这个静态内部类中有一个属性a是泛型数组。而基本类型是无法泛型化的，所以它把int[] array 数组当成了一个泛型对象，所以集合中最终只有一个元素array。
+
+在进入Arrays.asList(array)方法之前。debug截图如下：  
 
 
