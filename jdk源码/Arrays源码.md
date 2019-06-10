@@ -1,5 +1,5 @@
 ## Arrays.asList()的坑 ##
-使用Arrays.asList()是想将数组或一些元素转为集合,而你得到的集合并不一定是你想要的那个集合。先看几个示例，常用错误用法。 
+使用Arrays.asList()是想将数组或一些元素转为集合,而你得到的集合并不一定是你想要的那个集合。在对集合的操作过程中，也很容易出现问题。先看几个示例，常用错误用法。 
 ### 错误一、基本类型的数组作为asList参数 ###
 
     public static void baseTypeTest() {
@@ -105,6 +105,17 @@
     }
 
 执行结果：3。
+
+最low的办法，遍历。但是，如果不了解原理，还不如用low的办法，保证不出错。
+
+    public static void lowTypeTest() {
+        int[] array = {1, 2, 3};
+        List list = new ArrayList();
+        for (int i : array) {
+            list.add(i);
+        }
+        System.out.println(list.size());
+    }
 
 
 ### 错误二原理解析： ###
