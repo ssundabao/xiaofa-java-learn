@@ -48,6 +48,30 @@
 无法进行添加和删除，会直接抛异常。
 
 ## 源码分析 ##
+贴一张类关系图：  
+
+
 
 ### 错误一原理解析： ###
+进入Arrays.asList()方法源码，发现该方法返回的是一个ArrayList。是不是很惊喜？这不就是最常用的ArrayList集合。你要这么想，基本就死翘翘了。
+
+	public static <T> List<T> asList(T... a) {
+        return new ArrayList<>(a);
+    }
+
+再点进入ArrayList中，源码如下：
+
+     private static class ArrayList<E> extends AbstractList<E>
+        implements RandomAccess, java.io.Serializable
+
+     ArrayList(E[] array) {
+        a = Objects.requireNonNull(array);
+    }
+
+重点：这个构造方法不是常见的ArrayList，这个构造方法是在 Arrays.ArrayList类中（这个类是Arrays这个类的静态内部类）。所以并不是我们常用的那个ArrayList类。再看看数组的长度为3，为什么转化为集合之后，长度就变为1呢？接着看源码：  
+
+    private final E[] a;
+
+这个静态内部类中有一个属性a是泛型数组。而基本类型是无法泛型化的，所以它把int[] array 数组当成了一个泛型对象，所以集合中最终只有一个元素array。
+
 
