@@ -147,9 +147,12 @@ returnType 定义了返回类型;
 	  private final String closeToken; // 解析结束标识
 	  private final TokenHandler handler; 
 
-TokenHandler是一个接口，在实际解析过程中使用的是VariableTokenHandler类（这个类是PropertyParser类的内部类），类中的属性variables，用来接收配置文件。  
+TokenHandler 是一个接口，在实际解析过程中使用的是 VariableTokenHandler 类（这个类是PropertyParser 类的内部类），类中的属性 variables，用来接收配置文件。 最重要的是 parse 方法，我个人是调过了内部的实现细节。 总之，能够替换掉配置文件中使用$占位符的值。
 
-我使用的是源码中的测试类PropertyParserTest的replaceToVariableValue方法，测试截图如下：
+在使用源码中的测试类 PropertyParserTest 的 replaceToVariableValue 方法进行测试时的截图如下：
 
 ![](https://raw.githubusercontent.com/zhaoxiaofa/xiaofa-java-learn/master/pictures/mybatis/GenericTokenParser.parse.png)
+
+也可以用 GenericTokenParserTest 类中的测试方法进行测试，效果是一样的。  
+
 
