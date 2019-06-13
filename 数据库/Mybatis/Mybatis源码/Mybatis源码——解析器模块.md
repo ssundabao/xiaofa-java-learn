@@ -102,6 +102,30 @@ createDocument源码和得到的Document截图如下：
     }
 
 
+![](https://raw.githubusercontent.com/zhaoxiaofa/xiaofa-java-learn/master/pictures/mybatis/xpathParser.png)
+
+此时，已经得到了一个 XPathParser 对象，对象中的 document 属性就是解析 xml 之后的结果。下面进入单元测试的结果校验方法。取第一个校验
+
+    assertEquals((Long) 1970L, parser.evalLong("/employee/birth_date/year"));
+
+进入evalLong方法，一步步debug，会发现，最终都是调用的 evaluate 方法。所以这里着重讲一下 evaluate 方法。源码如下：  
+
+	private Object evaluate(String expression, Object root, QName returnType) {
+	    try {
+	      // 调用xPath的解析方法
+	      return xpath.evaluate(expression, root, returnType);
+	    } catch (Exception e) {
+	      throw new BuilderException("Error evaluating XPath.  Cause: " + e, e);
+	    }
+    }
+
+expression 就是想要核对的节点，在本例中是"/employee/birth_date/year";  
+root 就是第一步获取的 document;  
+returnType 定义了返回类型;  
+
+底层调用的是 XPath 类的 evaluate 方法。具体实现暂时不看，总之就是能够根据节点路径在document中找到对饮的值。  
+
+
 
 
 
