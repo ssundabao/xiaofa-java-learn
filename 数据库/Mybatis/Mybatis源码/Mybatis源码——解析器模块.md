@@ -101,6 +101,7 @@ createDocument源码和得到的Document截图如下：
       throw new BuilderException("Error creating document instance.  Cause: " + e, e);
     }
 
+上面是解析的xml文件部分截图，下面是解析之后的document对象。
 
 ![](https://raw.githubusercontent.com/zhaoxiaofa/xiaofa-java-learn/master/pictures/mybatis/xpathParser.png)
 
@@ -123,15 +124,13 @@ expression 就是想要核对的节点，在本例中是"/employee/birth_date/ye
 root 就是第一步获取的 document;  
 returnType 定义了返回类型;  
 
-底层调用的是 XPath 类的 evaluate 方法。具体实现暂时不看，总之就是能够根据节点路径在document中找到对饮的值。  
+底层调用的是 XPath 类的 evaluate 方法。具体实现暂时不看，总之就是能够根据节点路径在document中找到对应的值。  
 
-
-
-
+其他 eval 前缀的方法大概类似，不再赘述。  
 
 
 **总结一下XPathParser：**   
-其实看着方法很多，其实只有各种构造方法XPathParser，每个构造方法都调用的commonConstructor方法，基础的evaluate方法，基于该方法封装的各种形式的eval前缀开头的转化方法，还有createDocument方法（把文件解析为Document）。这样整合起来，结构就清晰很多了。
+就是用来解析xml的。其实看着方法很多，其实只有各种构造方法XPathParser，每个构造方法都调用的commonConstructor方法，基础的evaluate方法，基于该方法封装的各种形式的eval前缀开头的转化方法，还有createDocument方法（把文件解析为Document）。这样整合起来，结构就清晰很多了。
 
 
 ## PropertyParser ##
