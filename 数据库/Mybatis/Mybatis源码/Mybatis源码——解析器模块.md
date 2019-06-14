@@ -134,7 +134,7 @@ returnType 定义了返回类型;
 
 
 ## PropertyParser ##
-
+是动态属性解析器。
 
 
 
